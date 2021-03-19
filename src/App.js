@@ -1,3 +1,4 @@
+/* eslint-disable no-lone-blocks */
 import { useState } from "react";
 import './App.css';
 import { tileType, minTotalCards, maxTotalCards, placeholderDeck, roadCards, roadsideCards, landscapeCards, specialCards, goldCards, classChoice } from './constants/constants';
@@ -43,7 +44,8 @@ const randomizeCards = (e) => {
   const specialResults = [];
   const goldResults = [];
   const classResults = [];
-  const resultingCards = [roadResults, roadsideResults, landscapeResults, specialResults, goldResults, classResults, cardTotalSum];
+  const resultingCards = [roadResults, roadsideResults, landscapeResults, specialResults, goldResults, classResults,
+    cardTotalSum, roadTotal, roadsideTotal, landscapeTotal, specialTotal];
 
   // populate randomized deck given generated data
   var i;
@@ -55,19 +57,31 @@ const randomizeCards = (e) => {
       // generate random number from 0 to size of array
       randomCard = Math.floor(Math.random() * (Math.floor(allCards[i].length) - Math.ceil(0)) + Math.ceil(0));
 
-      // add randomly selected card to array of arrays containing all selected cards
-      resultingCards[i].push(allCards[i][randomCard]);
+      // check if wheat field was selected and then add village if it hasn't been added yet
+      if (allCards[i][randomCard] === "Wheat Fields") {
+        if (allCards[i].indexOf("Village") > -1) {
+          resultingCards[i].push("Village");
+          resultingCards[i].push(allCards[i][randomCard]);
+          allCards[i].splice(allCards[i].indexOf("Village"), 1);
+          allCards[i].splice(randomCard, 1);
+          j++;
+        }
+      }
+      else {
+        // add randomly selected card to array of arrays containing all selected cards
+        resultingCards[i].push(allCards[i][randomCard]);
 
-      // remove randomly selected card to avoid duplicates
-      allCards[i].splice(randomCard, 1);
+        // remove randomly selected card(s) to avoid duplicates
+        allCards[i].splice(randomCard, 1);
+      }
 
     }
 
   }
 
   // set the randomized deck as state
+  console.log(resultingCards);
   return resultingCards;
-  //console.log(resultingCards);
 }
 
 {/* 
@@ -81,15 +95,15 @@ const App = () => {
     <div className="App">
       <h1 className="title">Loop Hero Randomizer</h1>
       <button onClick={() => setRandomizedDeck(randomizeCards)}>Randomize</button>
-      <h2>Total Cards</h2>
-      {randomizedDeck[6]}
-      <h2>Road</h2>
+      <h2>Total Cards: {randomizedDeck[6]}</h2>
+
+      <h2>Road [{randomizedDeck[7]}]</h2>
       {randomizedDeck[0].join(' | ')}
-      <h2>Roadside</h2>
+      <h2>Roadside [{randomizedDeck[8]}]</h2>
       {randomizedDeck[1].join(' | ')}
-      <h2>Landscape</h2>
+      <h2>Landscape [{randomizedDeck[9]}]</h2>
       {randomizedDeck[2].join(' | ')}
-      <h2>Special</h2>
+      <h2>Special [{randomizedDeck[10]}]</h2>
       {randomizedDeck[3].join(' | ')}
       <h2>Gold</h2>
       {randomizedDeck[4].join(' | ')}
