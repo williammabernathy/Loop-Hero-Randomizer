@@ -5,4 +5,9 @@
 
 .App {
   font-family: ARCADECLASSIC;
+  padding-left: 10px;
+}
+
+.title {
+  font-size: 60px;
 }
