@@ -1,4 +1,4 @@
-export const tileType = ["Road", "Roadside", "Landscape", "Special", "Golden"];
+export const tileType = ["Road", "Roadside", "Landscape", "Special", "Golden", "Class"];
 
 export const minTotalCards = 7;
 export const maxTotalCards = 15;
@@ -16,3 +16,4 @@ specialCards.name = "Special";
 export const goldCards = ["Ancestral Crypt", "Zero Milestone", "Maze of Memories", "Arsenal"];
 goldCards.name = "Gold";
 export const classChoice = ["Warrior", "Rogue", "Necromancer"];
+classChoice.name = "Class"

@@ -1,14 +1,14 @@
 /* eslint-disable no-lone-blocks */
 import { useState } from "react";
 import './App.css';
-import { minTotalCards, maxTotalCards, placeholderDeck, roadCards, roadsideCards, landscapeCards, specialCards, goldCards, classChoice } from './constants/constants';
+import { tileType, minTotalCards, maxTotalCards, placeholderDeck, roadCards, roadsideCards, landscapeCards, specialCards, goldCards, classChoice } from './constants/constants';
 //import DeckSleeve from './Components/DeckSleeve/DeckSleeve';
 
 // randomize the deck
-const randomizeCards = (e) => {
+const randomizeCards = () => {
   //e.preventDefault();
 
-  // loop to ensure max total card limit of 15 isn't breached or min total limit of 7 isn't lower
+  // loop to ensure constraints of 15 max and 7 min cards are met
   let roadTotal, roadsideTotal, landscapeTotal, specialTotal, goldTotal, classTotal, cardTotalSum;
   do {
     // get the amount of cards for each "sleeve"
@@ -17,6 +17,7 @@ const randomizeCards = (e) => {
     roadsideTotal = Math.floor(Math.random() * (Math.floor(9) - Math.ceil(2) + 1) + Math.ceil(2));
     landscapeTotal = Math.floor(Math.random() * (Math.floor(5) - Math.ceil(2) + 1) + Math.ceil(2));
     specialTotal = Math.floor(Math.random() * (Math.floor(4) - Math.ceil(1) + 1) + Math.ceil(1));
+
     cardTotalSum = roadTotal + roadsideTotal + landscapeTotal + specialTotal;
   } while (cardTotalSum > maxTotalCards || cardTotalSum < minTotalCards)
 
@@ -42,6 +43,8 @@ const randomizeCards = (e) => {
   let specialResults = [];
   let goldResults = [];
   let classResults = [];
+
+  // empty 2d array to return for state change
   let resultingCards = [roadResults, roadsideResults, landscapeResults, specialResults, goldResults, classResults,
     cardTotalSum, roadTotal, roadsideTotal, landscapeTotal, specialTotal];
 
@@ -56,17 +59,34 @@ const randomizeCards = (e) => {
       randomCard = Math.floor(Math.random() * (Math.floor(allCards[i].length) - Math.ceil(0)) + Math.ceil(0));
 
       // check if wheat field was selected and then add village if it hasn't been added yet
-      if (allCards[i][randomCard] === "Wheat Fields") {
-        if (allCards[i].indexOf("Village") > -1) {
-          resultingCards[i].push("Village");
-          resultingCards[i].push(allCards[i][randomCard]);
-          allCards[i].splice(randomCard, 1);
-          allCards[i].splice(allCards[i].indexOf("Village"), 1);
-          resultingCards[7]++;
+      if (i === 0 && allCards[0][randomCard] === "Wheat Fields") {
+        if (allCards[0].indexOf("Village") > -1) {
+          resultingCards[0].push("Village");
+          resultingCards[0].push(allCards[i][randomCard]);
+          allCards[0].splice(randomCard, 1);
+          allCards[0].splice(allCards[i].indexOf("Village"), 1);
+          resultingCards[6]++;      // card sum totals
+          resultingCards[7]++;      // road totals
         }
         else {
-          resultingCards[i].push(allCards[i][randomCard]);
-          allCards[i].splice(randomCard, 1);
+          resultingCards[0].push(allCards[i][randomCard]);
+          allCards[0].splice(randomCard, 1);
+        }
+      }
+      else if (i === 1 && allCards[1][randomCard] === "Blood Grove") {
+        // check if blood grove will be paired with grove
+        console.log('blood grove found');
+        if (resultingCards[0].indexOf("Grove") > -1) {
+          console.log('grove also found');
+          resultingCards[1].push(allCards[1][randomCard]);
+          allCards[1].splice(randomCard, 1);
+        }
+        else {
+          // try again
+          console.log('no grove');
+          resultingCards[6]--;      // card sum totals
+          resultingCards[8]--;      // roadside totals
+          j++;
         }
       }
       else {
@@ -88,9 +108,9 @@ const randomizeCards = (e) => {
   goldCardsTemp = goldCards;
   classChoiceTemp = classChoice;
   allCards = [roadCardsTemp, roadsideCardsTemp, landscapeCardsTemp, specialCardsTemp, goldCardsTemp, classChoiceTemp];
-  
+
   // set the randomized deck as state
-  console.log(resultingCards);
+  //console.log(resultingCards);
   return resultingCards;
 }
 
@@ -107,22 +127,22 @@ const App = () => {
       <button onClick={() => setRandomizedDeck(randomizeCards)}>Randomize</button>
       <h2>Total Cards: {randomizedDeck[6]}</h2>
 
-      <h2>Road [{randomizedDeck[7]}]</h2>
+      <h2>{tileType[0]} [{randomizedDeck[7]}]</h2>
       {randomizedDeck[0].join(' | ')}
 
-      <h2>Roadside [{randomizedDeck[8]}]</h2>
+      <h2>{tileType[1]} [{randomizedDeck[8]}]</h2>
       {randomizedDeck[1].join(' | ')}
 
-      <h2>Landscape [{randomizedDeck[9]}]</h2>
+      <h2>{tileType[2]} [{randomizedDeck[9]}]</h2>
       {randomizedDeck[2].join(' | ')}
 
-      <h2>Special [{randomizedDeck[10]}]</h2>
+      <h2>{tileType[3]} [{randomizedDeck[10]}]</h2>
       {randomizedDeck[3].join(' | ')}
 
-      <h2>Gold</h2>
+      <h2>{tileType[4]}</h2>
       {randomizedDeck[4].join(' | ')}
 
-      <h2>Class</h2>
+      <h2>{tileType[5]}</h2>
       {randomizedDeck[5].join(' | ')}
 
 
