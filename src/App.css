@@ -1,0 +1,8 @@
+@font-face{
+  font-family: 'ARCADECLASSIC';
+  src: local('ARCADECLASSIC'), url(./fonts/ARCADECLASSIC.TTF) format('truetype');
+}
+
+.App {
+  font-family: ARCADECLASSIC;
+}
