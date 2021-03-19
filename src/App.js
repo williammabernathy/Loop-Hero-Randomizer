@@ -1,13 +1,13 @@
 import { useState } from "react";
 import './App.css';
-import { tileType, maxTotalCards, placeholderDeck, roadCards, roadsideCards, landscapeCards, specialCards, goldCards, classChoice } from './constants/constants';
+import { tileType, minTotalCards, maxTotalCards, placeholderDeck, roadCards, roadsideCards, landscapeCards, specialCards, goldCards, classChoice } from './constants/constants';
 //import DeckSleeve from './Components/DeckSleeve/DeckSleeve';
 
 // randomize the deck
 const randomizeCards = (e) => {
   //e.preventDefault();
 
-  // loop to ensure max total card limit of 15 isn't breached
+  // loop to ensure max total card limit of 15 isn't breached or min total limit of 7 isn't lower
   var roadTotal, roadsideTotal, landscapeTotal, specialTotal, goldTotal, classTotal;
   var cardTotalSum;
   do {
@@ -17,11 +17,12 @@ const randomizeCards = (e) => {
     roadsideTotal = Math.floor(Math.random() * (Math.floor(9) - Math.ceil(2) + 1) + Math.ceil(2));
     landscapeTotal = Math.floor(Math.random() * (Math.floor(5) - Math.ceil(2) + 1) + Math.ceil(2));
     specialTotal = Math.floor(Math.random() * (Math.floor(4) - Math.ceil(1) + 1) + Math.ceil(1));
-    goldTotal = 1;
-    classTotal = 1;
     cardTotalSum = roadTotal + roadsideTotal + landscapeTotal + specialTotal;
     console.log(cardTotalSum);
-  } while (cardTotalSum > maxTotalCards)
+  } while (cardTotalSum > maxTotalCards || cardTotalSum < minTotalCards)
+
+  goldTotal = 1;
+  classTotal = 1;
 
   // temp arrays to restore values after generating deck
   const roadCardsTemp = roadCards;
@@ -42,7 +43,7 @@ const randomizeCards = (e) => {
   const specialResults = [];
   const goldResults = [];
   const classResults = [];
-  const resultingCards = [roadResults, roadsideResults, landscapeResults, specialResults, goldResults, classResults];
+  const resultingCards = [roadResults, roadsideResults, landscapeResults, specialResults, goldResults, classResults, cardTotalSum];
 
   // populate randomized deck given generated data
   var i;
@@ -80,7 +81,8 @@ const App = () => {
     <div className="App">
       <h1 className="title">Loop Hero Randomizer</h1>
       <button onClick={() => setRandomizedDeck(randomizeCards)}>Randomize</button>
-      {console.log(randomizedDeck)}
+      <h2>Total Cards</h2>
+      {randomizedDeck[6]}
       <h2>Road</h2>
       {randomizedDeck[0].join(' | ')}
       <h2>Roadside</h2>
