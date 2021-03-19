@@ -3,7 +3,7 @@ export const tileType = ["Road", "Roadside", "Landscape", "Special", "Golden"];
 export const minTotalCards = 7;
 export const maxTotalCards = 15;
 
-export const placeholderDeck = [[], [], [], [], [], [], []];
+export const placeholderDeck = [[], [], [], [], [], [], [0], [0], [0], [0], [0]];
 
 export const roadCards = ["Cemetary", "Village", "Grove", "Wheat Fields", "Swamps", "Ruins"];
 roadCards.name = "Road";
