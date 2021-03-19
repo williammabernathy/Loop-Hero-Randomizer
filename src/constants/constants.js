@@ -1,6 +1,6 @@
 export const tileType = ["Road", "Roadside", "Landscape", "Special", "Golden"];
 
-export const placeholderDeck = [[], [], [], [], []];
+export const placeholderDeck = [[], [], [], [], [], []];
 
 export const roadCards = ["Cemetary", "Village", "Grove", "Wheat Fields", "Swamps", "Ruins"];
 roadCards.name = "Road";
@@ -12,3 +12,4 @@ export const specialCards = ["Oblivion", "Beacon", "Storm Temple", "Temporal Bea
 specialCards.name = "Special";
 export const goldCards = ["Ancestral Crypt", "Zero Milestone", "Maze of Memories", "Arsenal"];
 goldCards.name = "Gold";
+export const classChoice = ["Warrior", "Rogue", "Necromancer"];
