@@ -1,20 +1,27 @@
 import { useState } from "react";
 import './App.css';
-import { tileType, placeholderDeck, roadCards, roadsideCards, landscapeCards, specialCards, goldCards, classChoice } from './constants/constants';
+import { tileType, maxTotalCards, placeholderDeck, roadCards, roadsideCards, landscapeCards, specialCards, goldCards, classChoice } from './constants/constants';
 //import DeckSleeve from './Components/DeckSleeve/DeckSleeve';
 
 // randomize the deck
 const randomizeCards = (e) => {
   //e.preventDefault();
 
-  // get the amount of cards for each "sleeve"
-  // this is per the actual documentation.....
-  const roadTotal = Math.floor(Math.random() * (Math.floor(6) - Math.ceil(2) + 1) + Math.ceil(2));
-  const roadsideTotal = Math.floor(Math.random() * (Math.floor(9) - Math.ceil(2) + 1) + Math.ceil(2));
-  const landscapeTotal = Math.floor(Math.random() * (Math.floor(5) - Math.ceil(2) + 1) + Math.ceil(2));
-  const specialTotal = Math.floor(Math.random() * (Math.floor(4) - Math.ceil(1) + 1) + Math.ceil(1));
-  const goldTotal = 1;
-  const classTotal = 1;
+  // loop to ensure max total card limit of 15 isn't breached
+  var roadTotal, roadsideTotal, landscapeTotal, specialTotal, goldTotal, classTotal;
+  var cardTotalSum;
+  do {
+    // get the amount of cards for each "sleeve"
+    // this is per the actual documentation.....
+    roadTotal = Math.floor(Math.random() * (Math.floor(6) - Math.ceil(2) + 1) + Math.ceil(2));
+    roadsideTotal = Math.floor(Math.random() * (Math.floor(9) - Math.ceil(2) + 1) + Math.ceil(2));
+    landscapeTotal = Math.floor(Math.random() * (Math.floor(5) - Math.ceil(2) + 1) + Math.ceil(2));
+    specialTotal = Math.floor(Math.random() * (Math.floor(4) - Math.ceil(1) + 1) + Math.ceil(1));
+    goldTotal = 1;
+    classTotal = 1;
+    cardTotalSum = roadTotal + roadsideTotal + landscapeTotal + specialTotal;
+    console.log(cardTotalSum);
+  } while (cardTotalSum > maxTotalCards)
 
   // temp arrays to restore values after generating deck
   const roadCardsTemp = roadCards;
@@ -52,7 +59,7 @@ const randomizeCards = (e) => {
 
       // remove randomly selected card to avoid duplicates
       allCards[i].splice(randomCard, 1);
-      
+
     }
 
   }
@@ -103,7 +110,7 @@ const App = () => {
         }
       </ul>
       */}
-    
+
     </div>
   );
 }
