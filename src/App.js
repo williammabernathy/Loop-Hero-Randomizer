@@ -7,6 +7,7 @@ import { tileType, minTotalCards, maxTotalCards, placeholderDeck, roadCards, roa
 // randomize the deck
 const randomizeCards = () => {
   //e.preventDefault();
+  console.log(roadCards);
 
   // loop to ensure constraints of 15 max and 7 min cards are met
   let roadTotal, roadsideTotal, landscapeTotal, specialTotal, goldTotal, classTotal, cardTotalSum;
@@ -25,12 +26,12 @@ const randomizeCards = () => {
   classTotal = 1;
 
   // temp arrays to restore values after generating deck
-  let roadCardsTemp = roadCards;
-  let roadsideCardsTemp = roadsideCards;
-  let landscapeCardsTemp = landscapeCards;
-  let specialCardsTemp = specialCards;
-  let goldCardsTemp = goldCards;
-  let classChoiceTemp = classChoice;
+  let roadCardsTemp = roadCards.slice();
+  let roadsideCardsTemp = roadsideCards.slice();
+  let landscapeCardsTemp = landscapeCards.slice();
+  let specialCardsTemp = specialCards.slice();
+  let goldCardsTemp = goldCards.slice();
+  let classChoiceTemp = classChoice.slice();
 
   // set up array of arrays containing generated totals and all card values
   let allCards = [roadCardsTemp, roadsideCardsTemp, landscapeCardsTemp, specialCardsTemp, goldCardsTemp, classChoiceTemp];
@@ -73,17 +74,15 @@ const randomizeCards = () => {
           allCards[0].splice(randomCard, 1);
         }
       }
+      // check if blood grove was selected and if conditions to select it are met
       else if (i === 1 && allCards[1][randomCard] === "Blood Grove") {
         // check if blood grove will be paired with grove
-        console.log('blood grove found');
         if (resultingCards[0].indexOf("Grove") > -1) {
-          console.log('grove also found');
           resultingCards[1].push(allCards[1][randomCard]);
           allCards[1].splice(randomCard, 1);
         }
         else {
-          // try again
-          console.log('no grove');
+          // skip blood grove
           resultingCards[6]--;      // card sum totals
           resultingCards[8]--;      // roadside totals
           j++;
@@ -100,14 +99,6 @@ const randomizeCards = () => {
     }
 
   }
-
-  roadCardsTemp = roadCards;
-  roadsideCardsTemp = roadsideCards;
-  landscapeCardsTemp = landscapeCards;
-  specialCardsTemp = specialCards;
-  goldCardsTemp = goldCards;
-  classChoiceTemp = classChoice;
-  allCards = [roadCardsTemp, roadsideCardsTemp, landscapeCardsTemp, specialCardsTemp, goldCardsTemp, classChoiceTemp];
 
   // set the randomized deck as state
   //console.log(resultingCards);
