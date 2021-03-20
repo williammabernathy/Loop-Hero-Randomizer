@@ -7,7 +7,6 @@ import { tileType, minTotalCards, maxTotalCards, placeholderDeck, roadCards, roa
 // randomize the deck
 const randomizeCards = () => {
   //e.preventDefault();
-  console.log(roadCards);
 
   // loop to ensure constraints of 15 max and 7 min cards are met
   let roadTotal, roadsideTotal, landscapeTotal, specialTotal, goldTotal, classTotal, cardTotalSum;
@@ -61,13 +60,19 @@ const randomizeCards = () => {
 
       // check if wheat field was selected and then add village if it hasn't been added yet
       if (i === 0 && allCards[0][randomCard] === "Wheat Fields") {
-        if (allCards[0].indexOf("Village") > -1) {
+        if (allCards[0].indexOf("Village") > -1 && cardTotalSum < 14) {
           resultingCards[0].push("Village");
           resultingCards[0].push(allCards[i][randomCard]);
           allCards[0].splice(randomCard, 1);
           allCards[0].splice(allCards[i].indexOf("Village"), 1);
           resultingCards[6]++;      // card sum totals
           resultingCards[7]++;      // road totals
+        }
+        else if (cardTotalSum > 13) {
+          // skip wheat field
+          resultingCards[6]--;      // card sum totals
+          resultingCards[7]--;      // roadside totals
+          j++;
         }
         else {
           resultingCards[0].push(allCards[i][randomCard]);
