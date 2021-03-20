@@ -3,11 +3,11 @@ export const tileType = ["Road", "Roadside", "Landscape", "Special", "Golden", "
 export const minTotalCards = 7;
 export const maxTotalCards = 15;
 
-export const placeholderDeck = [[], [], [], [], [], [], [0], [0], [0], [0], [0]];
+export const placeholderDeck = [[], [], [], [], [], [], ['00'], ['00'], ['00'], ['00'], ['00']];
 
 export const roadCards = ["Cemetary", "Village", "Grove", "Wheat Fields", "Swamps", "Ruins"];
 roadCards.name = "Road";
-export const roadsideCards = ["Spider Cocoon", "Vampire Mansion", "Battle Field", "Blood Grove", "Bookery", "Road Lantern", "Smith's Forge", "Chrono Crystals", "Outpost"];
+export const roadsideCards = ["Spider Cocoon", "Vampire's Mansion", "Battle Field", "Blood Grove", "Bookery", "Road Lantern", "Smith's Forge", "Chrono Crystals", "Outpost"];
 roadsideCards.name = "Roadside";
 export const landscapeCards = ["Rock/Mountain", "Forest/Thicket", "River", "Desert/Sand Dunes", "Meadow", "Suburbs"];
 landscapeCards.name = "Landscape";

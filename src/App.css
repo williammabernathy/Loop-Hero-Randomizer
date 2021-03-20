@@ -1,13 +1,50 @@
-@font-face{
-  font-family: 'ARCADECLASSIC';
-  src: local('ARCADECLASSIC'), url(./fonts/ARCADECLASSIC.TTF) format('truetype');
+@font-face {
+  font-family: "ARCADECLASSIC";
+  src: local("ARCADECLASSIC"), url(./fonts/ARCADECLASSIC.TTF) format("truetype");
 }
 
 .App {
   font-family: ARCADECLASSIC;
-  padding-left: 10px;
+  margin: 15px;
+  position: relative;
+  text-align: center;
 }
 
 .title {
   font-size: 60px;
+}
+
+table {
+  text-align: center;
+  display: inline-block;
+}
+
+table td {
+  width: 350px;
+  padding: 12px;
+  max-width: 350px;
+}
+
+table tr {
+  width: 20%;
+  vertical-align: top;
+}
+
+.cardsColumnsTitle {
+  text-align: center;
+}
+
+.cardsColumns {
+  text-align: center;
+  border-right: 1px solid black;
+  width: 250px;
+}
+
+.otherColumnTitle {
+  text-align: center;
+}
+
+.otherColumn {
+  text-align: center;
+  width: 250px;
 }

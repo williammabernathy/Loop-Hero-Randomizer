@@ -110,38 +110,62 @@ const randomizeCards = () => {
   return resultingCards;
 }
 
+const randomizeChapter = () => {
+  let randomChapter = Math.floor(Math.random() * (Math.floor(4) - Math.ceil(1) + 1) + Math.ceil(1));
+
+  return randomChapter;
+}
+
 {/* 
   Main Component
 */}
 const App = () => {
 
   const [randomizedDeck, setRandomizedDeck] = useState(placeholderDeck);
+  const [randomizedChapter, setRandomizedChapter] = useState(0);
 
   return (
     <div className="App">
       <h1 className="title">Loop Hero Randomizer</h1>
-      <button onClick={() => setRandomizedDeck(randomizeCards)}>Randomize</button>
-      <h2>Total Cards: {randomizedDeck[6]}</h2>
+      <table className="table">
+        <tbody>
+          <tr>
+            <th>
+              <h2 className="cardsColumnsTitle">Cards</h2>
+            </th>
+            <th>
+              <h2 className="otherColumnTitle">Other</h2>
+            </th>
+          </tr>
+          <tr>
+            <td className="cardsColumns">
+              <button onClick={() => setRandomizedDeck(randomizeCards)}>Randomize</button>
+              <h2>Total Cards: [{randomizedDeck[6]}]</h2>
+              <h2>{tileType[0]} [{randomizedDeck[7]}]</h2>
+              {randomizedDeck[0].join(' | ')}
 
-      <h2>{tileType[0]} [{randomizedDeck[7]}]</h2>
-      {randomizedDeck[0].join(' | ')}
+              <h2>{tileType[1]} [{randomizedDeck[8]}]</h2>
+              {randomizedDeck[1].join(' | ')}
 
-      <h2>{tileType[1]} [{randomizedDeck[8]}]</h2>
-      {randomizedDeck[1].join(' | ')}
+              <h2>{tileType[2]} [{randomizedDeck[9]}]</h2>
+              {randomizedDeck[2].join(' | ')}
 
-      <h2>{tileType[2]} [{randomizedDeck[9]}]</h2>
-      {randomizedDeck[2].join(' | ')}
+              <h2>{tileType[3]} [{randomizedDeck[10]}]</h2>
+              {randomizedDeck[3].join(' | ')}
 
-      <h2>{tileType[3]} [{randomizedDeck[10]}]</h2>
-      {randomizedDeck[3].join(' | ')}
+              <h2>{tileType[4]}</h2>
+              {randomizedDeck[4].join(' | ')}
 
-      <h2>{tileType[4]}</h2>
-      {randomizedDeck[4].join(' | ')}
-
-      <h2>{tileType[5]}</h2>
-      {randomizedDeck[5].join(' | ')}
-
-
+              <h2>{tileType[5]}</h2>
+              {randomizedDeck[5].join(' | ')}
+            </td>
+            <td className="otherColumn">
+              <button onClick={() => setRandomizedChapter(randomizeChapter)}>Randomize</button>
+              <h2>Chapter : [{randomizedChapter}]</h2>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
 
       {/*
