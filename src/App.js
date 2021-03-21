@@ -46,33 +46,28 @@ const randomizeCards = () => {
 
   // empty 2d array to return for state change
   let resultingCards = [roadResults, roadsideResults, landscapeResults, specialResults, goldResults, classResults,
-    cardTotalSum, roadTotal, roadsideTotal, landscapeTotal, specialTotal];
+    cardTotalSum];
 
   // populate randomized deck given generated data
   var i;
   for (i = 0; i < allCards.length; i++) {
     var j;
     var randomCard;
-    //console.log(allCards[i].name + ' total = ' + allCardTotals[i]);
     for (j = 0; j < allCardTotals[i]; j++) {
       // generate random number from 0 to size of array
       randomCard = Math.floor(Math.random() * (Math.floor(allCards[i].length) - Math.ceil(0)) + Math.ceil(0));
 
       // check if wheat field was selected and then add village if it hasn't been added yet
-      if (i === 0 && allCards[0][randomCard] === "Wheat Fields") {
+      if (allCards[i][randomCard] === "Wheat Fields") {
         if (allCards[0].indexOf("Village") > -1 && cardTotalSum < 14) {
           resultingCards[0].push("Village");
           resultingCards[0].push(allCards[i][randomCard]);
           allCards[0].splice(randomCard, 1);
           allCards[0].splice(allCards[i].indexOf("Village"), 1);
-          resultingCards[6]++;      // card sum totals
-          resultingCards[7]++;      // road totals
         }
         else if (cardTotalSum > 13) {
-          // skip wheat field
-          resultingCards[6]--;      // card sum totals
-          resultingCards[7]--;      // roadside totals
-          j++;
+          // skip wheat field, too many cards for wheat fields AND village
+          continue;
         }
         else {
           resultingCards[0].push(allCards[i][randomCard]);
@@ -80,7 +75,7 @@ const randomizeCards = () => {
         }
       }
       // check if blood grove was selected and if conditions to select it are met
-      else if (i === 1 && allCards[1][randomCard] === "Blood Grove") {
+      else if (allCards[i][randomCard] === "Blood Grove") {
         // check if blood grove will be paired with grove
         if (resultingCards[0].indexOf("Grove") > -1) {
           resultingCards[1].push(allCards[1][randomCard]);
@@ -88,9 +83,7 @@ const randomizeCards = () => {
         }
         else {
           // skip blood grove
-          resultingCards[6]--;      // card sum totals
-          resultingCards[8]--;      // roadside totals
-          j++;
+          continue;
         }
       }
       else {
@@ -101,9 +94,26 @@ const randomizeCards = () => {
         allCards[i].splice(randomCard, 1);
       }
 
+      // catches to ensure roads and roadsides don't break upper and lower limits
+      if(i === 0 && resultingCards[0].length < 2) {
+        j--;
+      }
+      else if (i === 0 && resultingCards[0].length === 6) {
+        break;
+      }
+
+      if(i === 1 && resultingCards[1].length < 2) {
+        j--;
+      }
+      else if (i === 1 && resultingCards[1].length === 9) {
+        break;
+      }
+
     }
 
   }
+
+  resultingCards[6] = resultingCards[0].length + resultingCards[1].length + resultingCards[2].length + resultingCards[3].length;
 
   // set the randomized deck as state
   //console.log(resultingCards);
@@ -141,16 +151,16 @@ const App = () => {
             <td className="cardsColumns">
               <button onClick={() => setRandomizedDeck(randomizeCards)}>Randomize</button>
               <h2>Total Cards: [{randomizedDeck[6]}]</h2>
-              <h2>{tileType[0]} [{randomizedDeck[7]}]</h2>
+              <h2>{tileType[0]} [{randomizedDeck[0].length}]</h2>
               {randomizedDeck[0].join(' | ')}
 
-              <h2>{tileType[1]} [{randomizedDeck[8]}]</h2>
+              <h2>{tileType[1]} [{randomizedDeck[1].length}]</h2>
               {randomizedDeck[1].join(' | ')}
 
-              <h2>{tileType[2]} [{randomizedDeck[9]}]</h2>
+              <h2>{tileType[2]} [{randomizedDeck[2].length}]</h2>
               {randomizedDeck[2].join(' | ')}
 
-              <h2>{tileType[3]} [{randomizedDeck[10]}]</h2>
+              <h2>{tileType[3]} [{randomizedDeck[3].length}]</h2>
               {randomizedDeck[3].join(' | ')}
 
               <h2>{tileType[4]}</h2>
