@@ -95,14 +95,14 @@ const randomizeCards = () => {
       }
 
       // catches to ensure roads and roadsides don't break upper and lower limits
-      if(i === 0 && resultingCards[0].length < 2) {
+      if (i === 0 && resultingCards[0].length < 2) {
         j--;
       }
       else if (i === 0 && resultingCards[0].length === 6) {
         break;
       }
 
-      if(i === 1 && resultingCards[1].length < 2) {
+      if (i === 1 && resultingCards[1].length < 2) {
         j--;
       }
       else if (i === 1 && resultingCards[1].length === 9) {
@@ -120,6 +120,7 @@ const randomizeCards = () => {
   return resultingCards;
 }
 
+// randomize the chapter from 1-4
 const randomizeChapter = () => {
   let randomChapter = Math.floor(Math.random() * (Math.floor(4) - Math.ceil(1) + 1) + Math.ceil(1));
 
@@ -131,12 +132,29 @@ const randomizeChapter = () => {
 */}
 const App = () => {
 
+  // states used through app
+  // our randomized deck, the randomized chapter and the page font
   const [randomizedDeck, setRandomizedDeck] = useState(placeholderDeck);
   const [randomizedChapter, setRandomizedChapter] = useState(0);
+  const [pageFont, setPageFont] = useState('ARCADECLASSIC');
+
+  // update the page font using event handler
+  const changeFont = (event) => {
+    setPageFont(event.target.value);
+  }
 
   return (
-    <div className="App">
+    <div className="App" style={{ fontFamily: pageFont }}>
       <h1 className="title">Loop Hero Randomizer</h1>
+
+      <div>
+        <select className="fontSelect" value={pageFont} onChange={changeFont} style={{ fontFamily: pageFont }}>
+          <option value="ARCADECLASSIC">Retro</option>
+          <option value="roboto">Simple</option>
+          <option value="dyslex">Dyslexic</option>
+        </select>
+      </div>
+
       <table className="table">
         <tbody>
           <tr>
@@ -149,7 +167,7 @@ const App = () => {
           </tr>
           <tr>
             <td className="cardsColumns">
-              <button onClick={() => setRandomizedDeck(randomizeCards)}>Randomize</button>
+              <button className="randomizeButton" style={{ fontFamily: pageFont }} onClick={() => setRandomizedDeck(randomizeCards)}>Randomize</button>
               <h2>Total Cards: [{randomizedDeck[6]}]</h2>
               <h2>{tileType[0]} [{randomizedDeck[0].length}]</h2>
               {randomizedDeck[0].join(' | ')}
@@ -170,7 +188,7 @@ const App = () => {
               {randomizedDeck[5].join(' | ')}
             </td>
             <td className="otherColumn">
-              <button onClick={() => setRandomizedChapter(randomizeChapter)}>Randomize</button>
+              <button className="randomizeButton" style={{ fontFamily: pageFont }} onClick={() => setRandomizedChapter(randomizeChapter)}>Randomize</button>
               <h2>Chapter : [{randomizedChapter}]</h2>
             </td>
           </tr>
