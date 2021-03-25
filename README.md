@@ -56,8 +56,6 @@ to practice/refresh my React.js skills.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-
 - npm
   ```sh
   npm install npm@latest -g
@@ -67,13 +65,15 @@ This is an example of how to list things you need to use the software and how to
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/williammabernathy/Loop-Hero-Randomizer
    ```
-2. Install NPM packages
+2. Navtigate to cloned folder 'loop-hero-randomizer'
+
+3. Install NPM packages
    ```sh
    npm install
    ```
-3. Run locally
+4. Run locally
    ```sh
    npm start
    ```
