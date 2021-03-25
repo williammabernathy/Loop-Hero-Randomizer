@@ -54,7 +54,7 @@ table {
 table td {
   width: 350px;
   padding: 12px;
-  max-width: 350px;
+  max-width: 950px;
 }
 
 table tr {
@@ -68,8 +68,8 @@ table tr {
 
 .cardsColumns {
   text-align: center;
-  border-right: 1px solid black;
-  width: 250px;
+  border-bottom: 1px solid black;
+  width: 950px;
 }
 
 .otherColumnTitle {
@@ -79,6 +79,7 @@ table tr {
 .otherColumn {
   text-align: center;
   width: 250px;
+  border-bottom: 1px solid black;
 }
 
 .simpleFooter {
@@ -88,4 +89,8 @@ table tr {
 
 a {
   color: #f2f2f2;
+}
+
+.cardImage {
+  margin: 5px;
 }

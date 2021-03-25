@@ -5,15 +5,15 @@ export const maxTotalCards = 15;
 
 export const placeholderDeck = [[], [], [], [], [], [], ['00'], ['00'], ['00'], ['00'], ['00']];
 
-export const roadCards = ["Cemetary", "Village", "Grove", "Wheat Fields", "Swamps", "Ruins"];
+export const roadCards = ["Cemetery", "Village", "Grove", "Wheat Fields", "Swamp", "Ruins"];
 roadCards.name = "Road";
-export const roadsideCards = ["Spider Cocoon", "Vampire's Mansion", "Battle Field", "Blood Grove", "Bookery", "Road Lantern", "Smith's Forge", "Chrono Crystals", "Outpost"];
+export const roadsideCards = ["Spider Cocoon", "Vampire Mansion", "Battlefield", "Blood Grove", "Bookery", "Road Lantern", "Smith Forge", "Chrono Crystals", "Outpost"];
 roadsideCards.name = "Roadside";
-export const landscapeCards = ["Rock/Mountain", "Forest/Thicket", "River", "Desert/Sand Dunes", "Meadow", "Suburbs"];
+export const landscapeCards = ["Mountain", "Thicket", "River", "Sand Dunes", "Meadow", "Suburbs"];
 landscapeCards.name = "Landscape";
 export const specialCards = ["Oblivion", "Beacon", "Storm Temple", "Temporal Beacon", "Treasury"];
 specialCards.name = "Special";
-export const goldCards = ["Ancestral Crypt", "Zero Milestone", "Maze of Memories", "Arsenal"];
+export const goldCards = ["Ancestral Crypt", "Zero Milestone", "Maze Of Memories", "Arsenal"];
 goldCards.name = "Gold";
 export const classChoice = ["Warrior", "Rogue", "Necromancer"];
 classChoice.name = "Class"

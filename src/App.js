@@ -157,41 +157,50 @@ const App = () => {
 
       <table className="table">
         <tbody>
+
           <tr>
             <th>
               <h2 className="cardsColumnsTitle">Cards</h2>
             </th>
-            <th>
-              <h2 className="otherColumnTitle">Other</h2>
-            </th>
           </tr>
+
           <tr>
             <td className="cardsColumns">
               <button className="randomizeButton" style={{ fontFamily: pageFont }} onClick={() => setRandomizedDeck(randomizeCards)}>Randomize</button>
               <h2>Total Cards: [{randomizedDeck[6]}]</h2>
               <h2>{tileType[0]} [{randomizedDeck[0].length}]</h2>
-              {randomizedDeck[0].join(' | ')}
+              {
+                randomizedDeck[0].map((card, index) => (<img className="cardImage" key={index} src={require(`./assets/${card}.webp`).default} alt={card} />))
+              }
 
               <h2>{tileType[1]} [{randomizedDeck[1].length}]</h2>
-              {randomizedDeck[1].join(' | ')}
+              {randomizedDeck[1].map((card, index) => (<img className="cardImage" key={index} src={require(`./assets/${card}.webp`).default} alt={card} />))}
 
               <h2>{tileType[2]} [{randomizedDeck[2].length}]</h2>
-              {randomizedDeck[2].join(' | ')}
+              {randomizedDeck[2].map((card, index) => (<img className="cardImage" key={index} src={require(`./assets/${card}.webp`).default} alt={card} />))}
 
               <h2>{tileType[3]} [{randomizedDeck[3].length}]</h2>
-              {randomizedDeck[3].join(' | ')}
+              {randomizedDeck[3].map((card, index) => (<img className="cardImage" key={index} src={require(`./assets/${card}.webp`).default} alt={card} />))}
 
               <h2>{tileType[4]}</h2>
-              {randomizedDeck[4].join(' | ')}
+              {randomizedDeck[4].map((card, index) => (<img className="cardImage" key={index} src={require(`./assets/${card}.webp`).default} alt={card} />))}
 
               <h2>{tileType[5]}</h2>
-              {randomizedDeck[5].join(' | ')}
+              {randomizedDeck[5].map((card, index) => (<img className="cardImage" key={index} src={require(`./assets/${card}.webp`).default} alt={card} />))}
             </td>
+          </tr>
+          <tr>
+            <th>
+              <h2 className="otherColumnTitle">Other</h2>
+            </th>
+          </tr>
+          <tr>
             <td className="otherColumn">
               <button className="randomizeButton" style={{ fontFamily: pageFont }} onClick={() => setRandomizedChapter(randomizeChapter)}>Randomize</button>
               <h2>Chapter : [{randomizedChapter}]</h2>
             </td>
           </tr>
+
         </tbody>
       </table>
 
