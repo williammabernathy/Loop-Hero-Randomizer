@@ -100,7 +100,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 William Matthew Abernathy - matthew.abernathy123@gmail.com
 
-Project Link: [https://github.com/williammabernathy/Loop-Hero-Randomizer](https://github.com/williammabernathy/Loop-Hero-Randomizer)
+Project Link: [https://loop-hero-randomizer.netlify.app/](https://loop-hero-randomizer.netlify.app/)
 
 <!-- ACKNOWLEDGEMENTS -->
 
