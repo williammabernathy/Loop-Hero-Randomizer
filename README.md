@@ -24,13 +24,11 @@
   <p align="center">
     A simple randomizer for the game Loop Hero.
     <br />
-    <br />
-    <br />
     <a href="https://loop-hero-randomizer.netlify.app/">View Project</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    <a href="https://github.com/williammabernathy/Loop-Hero-Randomizer/issues">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    <a href="https://github.com/williammabernathy/Loop-Hero-Randomizer/issues">Request Feature</a>
   </p>
 </p>
 
@@ -39,6 +37,7 @@
   <summary>Table of Contents</summary>
   <ol>
     <li><a href="#about-the-project">About The Project</a></li>
+    <li><a href="#built-with">Built With</a></li>
     <li><a href="#prerequisites">Prerequisites</a></li>
     <li><a href="#installation">Installation</a></li>
     <li><a href="#contributing">Contributing</a></li>
@@ -54,6 +53,9 @@
 A simple site originally made for me and the boys that I've sinced decided to 'publish' for a few others to use. This project was initially created 
 to practice/refresh my React.js skills.
 
+### Built With
+* [React](https://reactjs.org/)
+
 ### Prerequisites
 
 - npm
@@ -65,7 +67,7 @@ to practice/refresh my React.js skills.
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/williammabernathy/Loop-Hero-Randomizer
+   git clone https://github.com/williammabernathy/Loop-Hero-Randomizer.git
    ```
 2. Navtigate to cloned folder 'loop-hero-randomizer'
 
@@ -101,8 +103,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 William Matthew Abernathy - matthew.abernathy123@gmail.com
 
 Project Link: [https://loop-hero-randomizer.netlify.app/](https://loop-hero-randomizer.netlify.app/)
-
-<!-- ACKNOWLEDGEMENTS -->
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
