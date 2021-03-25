@@ -195,6 +195,7 @@ const App = () => {
         </tbody>
       </table>
 
+      <footer className="simpleFooter">Code at: <a href="https://example.com/faq.html"> https://github.com/williammabernathy/Loop-Hero-Randomizer </a></footer>
 
       {/*
       The start of making it "pretty"
