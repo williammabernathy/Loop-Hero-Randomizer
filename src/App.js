@@ -15,8 +15,8 @@ const randomizeCards = () => {
     // this is per the actual documentation.....
     roadTotal = Math.floor(Math.random() * (Math.floor(6) - Math.ceil(2) + 1) + Math.ceil(2));
     roadsideTotal = Math.floor(Math.random() * (Math.floor(9) - Math.ceil(2) + 1) + Math.ceil(2));
-    landscapeTotal = Math.floor(Math.random() * (Math.floor(5) - Math.ceil(2) + 1) + Math.ceil(2));
-    specialTotal = Math.floor(Math.random() * (Math.floor(4) - Math.ceil(1) + 1) + Math.ceil(1));
+    landscapeTotal = Math.floor(Math.random() * (Math.floor(6) - Math.ceil(2) + 1) + Math.ceil(2));
+    specialTotal = Math.floor(Math.random() * (Math.floor(5) - Math.ceil(1) + 1) + Math.ceil(1));
 
     cardTotalSum = roadTotal + roadsideTotal + landscapeTotal + specialTotal;
   } while (cardTotalSum > maxTotalCards || cardTotalSum < minTotalCards)
@@ -52,38 +52,37 @@ const randomizeCards = () => {
   var i;
   for (i = 0; i < allCards.length; i++) {
     var j;
-    var randomCard;
+    let randomCard;
     for (j = 0; j < allCardTotals[i]; j++) {
       // generate random number from 0 to size of array
       randomCard = Math.floor(Math.random() * (Math.floor(allCards[i].length) - Math.ceil(0)) + Math.ceil(0));
 
       // check if wheat field was selected and then add village if it hasn't been added yet
       if (allCards[i][randomCard] === "Wheat Fields") {
-        if (allCards[0].indexOf("Village") > -1 && cardTotalSum < 14) {
+        if (allCards[0].indexOf("Village") > -1) {
           resultingCards[0].push("Village");
           resultingCards[0].push(allCards[i][randomCard]);
           allCards[0].splice(randomCard, 1);
           allCards[0].splice(allCards[i].indexOf("Village"), 1);
-        }
-        else if (cardTotalSum > 13) {
-          // skip wheat field, too many cards for wheat fields AND village
-          continue;
+          cardTotalSum++;
         }
         else {
-          resultingCards[0].push(allCards[i][randomCard]);
-          allCards[0].splice(randomCard, 1);
+          // skip wheat field, too many cards for wheat fields AND village
+          j--;
+          console.log('do nothing wheat fields');
         }
       }
       // check if blood grove was selected and if conditions to select it are met
       else if (allCards[i][randomCard] === "Blood Grove") {
         // check if blood grove will be paired with grove
-        if (resultingCards[0].indexOf("Grove") > -1) {
+        if (resultingCards[0].indexOf("Grove") > -1 && cardTotalSum < 15) {
           resultingCards[1].push(allCards[1][randomCard]);
           allCards[1].splice(randomCard, 1);
         }
         else {
           // skip blood grove
-          continue;
+          j--;
+          console.log('do nothing grove');
         }
       }
       else {
@@ -92,21 +91,6 @@ const randomizeCards = () => {
 
         // remove randomly selected card(s) to avoid duplicates
         allCards[i].splice(randomCard, 1);
-      }
-
-      // catches to ensure roads and roadsides don't break upper and lower limits
-      if (i === 0 && resultingCards[0].length < 2) {
-        j--;
-      }
-      else if (i === 0 && resultingCards[0].length === 6) {
-        break;
-      }
-
-      if (i === 1 && resultingCards[1].length < 2) {
-        j--;
-      }
-      else if (i === 1 && resultingCards[1].length === 9) {
-        break;
       }
 
     }
@@ -127,6 +111,9 @@ const randomizeChapter = () => {
   return randomChapter;
 }
 
+
+
+
 {/* 
   Main Component
 */}
@@ -137,10 +124,11 @@ const App = () => {
   const [randomizedDeck, setRandomizedDeck] = useState(placeholderDeck);
   const [randomizedChapter, setRandomizedChapter] = useState(0);
   const [pageFont, setPageFont] = useState('ARCADECLASSIC');
+  // eslint-disable-next-line no-unused-vars
   const [pictures, setPictures] = useState(totalCards);
 
-  useEffect(() => {   
-    var i;   
+  useEffect(() => {
+    var i;
     for (i = 0; i < pictures.length; i++) {
       pictures[i].forEach((image) => {
         new Image().src = require(`./assets/${image}.webp`).default;
@@ -181,7 +169,7 @@ const App = () => {
           </tr>
 
           <tr>
-            <div className="cardsColumns">
+            <td className="cardsColumns">
               <h2>Total Cards: [{randomizedDeck[6]}]</h2>
               <h2>{tileType[0]} [{randomizedDeck[0].length}]</h2>
               {randomizedDeck[0].map((card, index) => (<img className="cardImage" key={index} src={require(`./assets/${card}.webp`).default} alt={card} />))}
@@ -200,7 +188,7 @@ const App = () => {
 
               <h2>{tileType[5]}</h2>
               {randomizedDeck[5].map((card, index) => (<img className="cardImage" key={index} src={require(`./assets/${card}.webp`).default} alt={card} />))}
-            </div>
+            </td>
           </tr>
           <tr>
             <th>
