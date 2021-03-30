@@ -1,7 +1,7 @@
 /* eslint-disable no-lone-blocks */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import './App.css';
-import { tileType, minTotalCards, maxTotalCards, placeholderDeck, roadCards, roadsideCards, landscapeCards, specialCards, goldCards, classChoice } from './constants/constants';
+import { tileType, minTotalCards, maxTotalCards, placeholderDeck, roadCards, roadsideCards, landscapeCards, specialCards, goldCards, classChoice, totalCards } from './constants/constants';
 //import DeckSleeve from './Components/DeckSleeve/DeckSleeve';
 
 // randomize the deck
@@ -137,6 +137,21 @@ const App = () => {
   const [randomizedDeck, setRandomizedDeck] = useState(placeholderDeck);
   const [randomizedChapter, setRandomizedChapter] = useState(0);
   const [pageFont, setPageFont] = useState('ARCADECLASSIC');
+  const [pictures, setPictures] = useState(totalCards);
+
+  useEffect(() => {   
+    var i;   
+    for (i = 0; i < pictures.length; i++) {
+      pictures[i].forEach((image) => {
+        new Image().src = require(`./assets/${image}.webp`).default;
+      });
+
+      /*var j;
+      for (j = 0; j < pictures[i].length; j++) {
+        
+      }*/
+    }
+  }, [pictures]);
 
   // update the page font using event handler
   const changeFont = (event) => {
@@ -161,17 +176,15 @@ const App = () => {
           <tr>
             <th>
               <h2 className="cardsColumnsTitle">Cards</h2>
+              <button className="randomizeButton" style={{ fontFamily: pageFont }} onClick={() => setRandomizedDeck(randomizeCards)}>Randomize</button>
             </th>
           </tr>
 
           <tr>
-            <td className="cardsColumns">
-              <button className="randomizeButton" style={{ fontFamily: pageFont }} onClick={() => setRandomizedDeck(randomizeCards)}>Randomize</button>
+            <div className="cardsColumns">
               <h2>Total Cards: [{randomizedDeck[6]}]</h2>
               <h2>{tileType[0]} [{randomizedDeck[0].length}]</h2>
-              {
-                randomizedDeck[0].map((card, index) => (<img className="cardImage" key={index} src={require(`./assets/${card}.webp`).default} alt={card} />))
-              }
+              {randomizedDeck[0].map((card, index) => (<img className="cardImage" key={index} src={require(`./assets/${card}.webp`).default} alt={card} />))}
 
               <h2>{tileType[1]} [{randomizedDeck[1].length}]</h2>
               {randomizedDeck[1].map((card, index) => (<img className="cardImage" key={index} src={require(`./assets/${card}.webp`).default} alt={card} />))}
@@ -187,7 +200,7 @@ const App = () => {
 
               <h2>{tileType[5]}</h2>
               {randomizedDeck[5].map((card, index) => (<img className="cardImage" key={index} src={require(`./assets/${card}.webp`).default} alt={card} />))}
-            </td>
+            </div>
           </tr>
           <tr>
             <th>

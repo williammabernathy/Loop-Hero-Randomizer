@@ -17,3 +17,5 @@ export const goldCards = ["Ancestral Crypt", "Zero Milestone", "Maze Of Memories
 goldCards.name = "Gold";
 export const classChoice = ["Warrior", "Rogue", "Necromancer"];
 classChoice.name = "Class"
+
+export const totalCards = [roadCards.slice(), roadsideCards.slice(), landscapeCards.slice(), specialCards.slice(), goldCards.slice(), classChoice.slice()];
