@@ -106,40 +106,47 @@ const randomizeCards = () => {
           Math.ceil(0)
       );
 
-      // check if wheat field was selected and then add village if it hasn't been added yet
-      if (allCards[i][randomCard] === "Wheat Fields") {
-        if (allCards[0].indexOf("Village") > -1 && cardTotalSum < 14) {
-          resultingCards[0].push("Village");
-          resultingCards[0].push(allCards[i][randomCard]);
-          allCards[0].splice(randomCard, 1);
-          allCards[0].splice(allCards[i].indexOf("Village"), 1);
-          cardTotalSum++;
-        } else if (resultingCards[i].indexOf("Village") > -1) {
-          resultingCards[i].push(allCards[i][randomCard]);
-          allCards[i].splice(randomCard, 1);
-        } else {
-          // skip wheat field
-          j--;
-          allCards[0].splice(allCards[i].indexOf("Wheat Fields"), 1);
-        }
-      }
-      // check if blood grove was selected and if conditions to select it are met
-      else if (allCards[i][randomCard] === "Blood Grove") {
-        // check if blood grove will be paired with grove
-        if (resultingCards[0].indexOf("Grove") > -1 && cardTotalSum < 15) {
-          resultingCards[1].push(allCards[1][randomCard]);
-          allCards[1].splice(randomCard, 1);
-        } else {
-          // skip blood grove
-          j--;
-          allCards[1].splice(allCards[1].indexOf("Blood Grove"), 1);
-        }
+      if (allCards[i][randomCard] === undefined) {
+        continue;
       } else {
-        // add randomly selected card to array of arrays containing all selected cards
-        resultingCards[i].push(allCards[i][randomCard]);
+        // check if wheat field was selected and then add village if it hasn't been added yet
+        if (allCards[i][randomCard] === "Wheat Fields") {
+          if (allCards[0].indexOf("Village") > -1 && resultingCards[6] < 14) {
+            resultingCards[0].push("Village");
+            resultingCards[0].push(allCards[i][randomCard]);
+            allCards[0].splice(randomCard, 1);
+            allCards[0].splice(allCards[i].indexOf("Village"), 1);
+            resultingCards[6]++;
+          } else if (resultingCards[i].indexOf("Village") > -1) {
+            resultingCards[i].push(allCards[i][randomCard]);
+            allCards[i].splice(randomCard, 1);
+          } else {
+            // skip wheat field
+            j--;
+            allCards[0].splice(allCards[i].indexOf("Wheat Fields"), 1);
+          }
+        }
+        // check if blood grove was selected and if conditions to select it are met
+        else if (allCards[i][randomCard] === "Blood Grove") {
+          // check if blood grove will be paired with grove
+          if (
+            resultingCards[0].indexOf("Grove") > -1 &&
+            resultingCards[6] < 15
+          ) {
+            resultingCards[1].push(allCards[1][randomCard]);
+            allCards[1].splice(randomCard, 1);
+          } else {
+            // skip blood grove
+            j--;
+            allCards[1].splice(allCards[1].indexOf("Blood Grove"), 1);
+          }
+        } else {
+          // add randomly selected card to array of arrays containing all selected cards
+          resultingCards[i].push(allCards[i][randomCard]);
 
-        // remove randomly selected card(s) to avoid duplicates
-        allCards[i].splice(randomCard, 1);
+          // remove randomly selected card(s) to avoid duplicates
+          allCards[i].splice(randomCard, 1);
+        }
       }
     }
   }
@@ -151,7 +158,6 @@ const randomizeCards = () => {
     resultingCards[3].length;
 
   // set the randomized deck as state
-  console.log(resultingCards);
   return resultingCards;
 };
 
@@ -179,6 +185,7 @@ const App = () => {
   const [pictures, setPictures] = useState(totalCards);
 
   useEffect(() => {
+    console.log(randomizedDeck);
     var i;
     for (i = 0; i < pictures.length; i++) {
       pictures[i].forEach((image) => {
@@ -190,7 +197,7 @@ const App = () => {
         
       }*/
     }
-  }, [pictures]);
+  }, [pictures, randomizedDeck]);
 
   // update the page font using event handler
   const changeFont = (event) => {
