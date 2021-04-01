@@ -238,10 +238,10 @@ const App = () => {
 
           <tr>
             <td className="cardsColumns">
+
               <h2>Total Cards: [{randomizedDeck[6]}]</h2>
-              <h2>
-                {tileType[0]} [{randomizedDeck[0].length}]
-              </h2>
+
+              <h2>{tileType[0]} [{randomizedDeck[0].length}]</h2>
               {randomizedDeck[0].map((card, index) => (
                 <img
                   className="cardImage"
@@ -251,9 +251,7 @@ const App = () => {
                 />
               ))}
 
-              <h2>
-                {tileType[1]} [{randomizedDeck[1].length}]
-              </h2>
+              <h2>{tileType[1]} [{randomizedDeck[1].length}]</h2>
               {randomizedDeck[1].map((card, index) => (
                 <img
                   className="cardImage"
@@ -263,9 +261,7 @@ const App = () => {
                 />
               ))}
 
-              <h2>
-                {tileType[2]} [{randomizedDeck[2].length}]
-              </h2>
+              <h2>{tileType[2]} [{randomizedDeck[2].length}]</h2>
               {randomizedDeck[2].map((card, index) => (
                 <img
                   className="cardImage"
@@ -275,9 +271,7 @@ const App = () => {
                 />
               ))}
 
-              <h2>
-                {tileType[3]} [{randomizedDeck[3].length}]
-              </h2>
+              <h2>{tileType[3]} [{randomizedDeck[3].length}]</h2>
               {randomizedDeck[3].map((card, index) => (
                 <img
                   className="cardImage"
@@ -306,6 +300,7 @@ const App = () => {
                   alt={card}
                 />
               ))}
+
             </td>
           </tr>
           <tr>
@@ -336,19 +331,6 @@ const App = () => {
         </a>
       </footer>
 
-      {/*
-      The start of making it "pretty"
-      <ul>
-        {tileType.map((item, index) => 
-          <li>
-            <DeckSleeve key={index} 
-              tileType={item}
-            />
-          </li>
-          )
-        }
-      </ul>
-      */}
     </div>
   );
 };
